@@ -17,12 +17,12 @@ export default class Team extends Component {
             //Se non è presente il pokemon (null) scrive una stringa "vuota" senza immagine
             if(pokemon === null) {
                 return (
-                    <PokemonItemOfList name="- - - -" index={index} image={null} />
+                    <PokemonItemOfList name="- - - -" index={index} image={null} key={index} />
                 )
             }
 
             return (
-                <PokemonItemOfList name={pokemon.name} index={index} image={pokemon.image} onDelete={this.props.onDelete} />
+                <PokemonItemOfList name={pokemon.name} index={index} image={pokemon.image} onDelete={this.props.onDelete} key={index} />
             )
 
         });

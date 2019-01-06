@@ -13,6 +13,7 @@ import CreatingForm from './Components/CreatingForm';
  * @param {Object} state - Oggetto nel quale sono definite le variabili utili a disegnare la pagina
  * @param {Object[]} state.pokemonList - Lista di pokemon
  * @param {Object[]} state.pokemonSpeciesList - Altra lista di pokemon con informazioni differenti alla precedente
+ * @param {Object[]} state.itemsList . Lista di oggetti
  * @param {Object[]} state.selectedPokemons - Lista di pokemon scelti dall'utente
  * @param {number} state.selectedIndex - Indice "puntatore" per muoversi nella lista di pokemon
  * @param {boolean} state.clicked - Indica quando è stato premuto il bottone per aggiungere un pokemon alla squadra (quindi quando è necessario visualizzare il form)
@@ -26,6 +27,7 @@ class App extends Component {
     this.state = {
       pokemonList: [],
       pokemonSpeciesList: [],
+      itemsList: [],
       selectedPokemons: [null, null, null, null, null, null],
       selectedIndex: 0,
       clicked: true
@@ -70,6 +72,28 @@ class App extends Component {
     pokemons.forEach(p => {
       promises.push(
         fetch(p.pokemon_species.url)
+          .then(p => p.json())
+        );
+    });
+
+    const result = await Promise.all(promises); //Risolve le promise (si attende che tutte le richieste siano soddisfatte prima di ritornare i risultati) e salva i risultati in una variabile
+    return result;
+  }
+
+
+  /**
+   * Prende i dati relativi agli oggetti
+   * @param {Object[]} items - Lista contenente gli url per fare la richiesta
+   * 
+   * @returns {Object[]} - Lista di oggetti
+   */
+  getItemsList = async (items) => {
+    let promises = [];  //Lista di promesse
+
+    //Per ogni oggetto esegue una fetch per prendere i dati
+    items.forEach(i => {
+      promises.push(
+        fetch(i.url)
           .then(p => p.json())
         );
     });
@@ -235,6 +259,21 @@ class App extends Component {
           });
         });
     });
+
+    //Richiesta al server per "ottenere" gli oggetti
+    fetch("https://pokeapi.co/api/v2/item/")
+    .then(result => result.json())
+
+    .then(items => {
+      //Ottiene la lista di oggetti...
+      this.getItemsList(items.results)
+      .then(a => {
+        //...e aggiorna lo stato con la lista piena
+        this.setState({
+          itemsList: a
+        });
+      });
+    });
   }
 
 
@@ -282,7 +321,7 @@ class App extends Component {
           <div className="pure-u-1-2 center-element">
             <img src={this.state.pokemonList[this.state.selectedIndex].sprites.front_default} className="pokemon-image"/>
             <br />
-            <i class="far fa-plus-square add-button" onClick={this.addPokemon} />
+            <i className="far fa-plus-square add-button" onClick={this.addPokemon} />
           </div>
           
           <div className="pure-u-1-2 eskeuro">

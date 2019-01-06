@@ -57,3 +57,24 @@ form.search-pokemon:hover .fa{
     background: rgb(255, 217, 0);
     color: white;
 }
+
+input.moveset {
+    margin: 1%;
+}
+
+input.select-form {
+    width: 75%;
+}
+
+div.select {
+    border: solid 2px #ccc;
+    width: 100%;
+    height: 35%;
+    margin-top: 1%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+div.container-select-form {
+    height: 90%;
+}

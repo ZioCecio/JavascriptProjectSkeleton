@@ -18,12 +18,12 @@ export default class PokemonItemOfList extends Component {
         if(this.props.image !== null) {
             image = <img className="small-image" src={this.props.image} />;
             button = <button className="pure-button delete-list" onClick={() => this.props.onDelete(this.props.index)}>
-                        <i class="far fa-trash-alt"></i>
+                        <i className="far fa-trash-alt"></i>
                     </button>;
         }
 
         return (
-            <div className="pure-u-1-2 center-element" key={this.props.index}>
+            <div className="pure-u-1-2 center-element">
                 <div className="pure-g">
                     <div className="pure-u-1-3">
                         {image}

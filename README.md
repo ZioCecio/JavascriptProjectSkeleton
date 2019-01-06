@@ -6,6 +6,9 @@ Ogni gruppo definisce un titolo progetto (< 100 caratteri) e una descrizione( <5
 
 ## Partecipanti
 Elenco partecipanti
+Maruelli
+Piovanelli
+Ceresara
 
 ## Ruoli
 
