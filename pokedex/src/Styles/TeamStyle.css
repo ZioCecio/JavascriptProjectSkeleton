@@ -1,0 +1,25 @@
+div.team-container {
+    border: solid 0.2vw #ccc;
+    width: 90%;
+    height: 75%;
+    margin-top: 10%;
+}
+
+img.small-image {
+    width: 40%;
+    height: 50%;
+    margin-top: 25%;
+}
+
+button.delete-list {
+    margin-top: 20%;
+}
+
+button.delete-list:hover {
+    background-color: red;
+}
+
+p.pokemon-name-list {
+    margin-top: 30%;
+    font-size: 0.6vw;
+}
