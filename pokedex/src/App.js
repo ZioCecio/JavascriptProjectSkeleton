@@ -30,7 +30,7 @@ class App extends Component {
       itemsList: [],
       selectedPokemons: [null, null, null, null, null, null],
       selectedIndex: 0,
-      clicked: true
+      clicked: false
     }
 
     this.pressed = false;
@@ -205,7 +205,8 @@ class App extends Component {
 
     //Aggiorna la lista di pokemon scelti dall'utente
     this.setState({
-      selectedPokemons: selectedPokemons
+      selectedPokemons: selectedPokemons,
+      clicked: false
     });
   }
 
@@ -222,6 +223,16 @@ class App extends Component {
     //Aggiorna la lista di pokemon scelti dall'utente
     this.setState({
       selectedPokemons: selectedPokemons
+    });
+  }
+
+
+  /**
+   * Cambia lo stato ogni volta che il bottone per aggiungere il pokemon alla squadra viene cliccato
+   */
+  clickAdd = () => {
+    this.setState({
+      clicked: true
     });
   }
 
@@ -283,7 +294,7 @@ class App extends Component {
    */
   render() {
     //Se la lista di pokemon non è ancora stata riempita fa visualizzare un caricamento
-    if(this.state.pokemonList.length <= 0)
+    if(this.state.pokemonList.length <= 0 || this.state.itemsList.length <= 0)
       return (<p>BOYYY</p>);
 
     //Per ogni tipo che posside un pokemon crea un nuovo componente per mostarlo
@@ -299,9 +310,13 @@ class App extends Component {
     let bomber = (<div className="description">
                     <p className="description">{this.getRightDescription("en")}</p>
                   </div>);
+    //Nella variabile viene salvato il bottone per aggiungere il pokemon alla squadra
+    let addButton = (<i className="far fa-plus-square add-button" onClick={this.clickAdd} />);
 
+    //Se il bottone è già stato premuto allora verra visualizzato il form per inserire i dati e il bottone per aggiungere il pokemon alla squadra
     if(this.state.clicked) {
-      bomber = <CreatingForm />
+      bomber = <CreatingForm />;
+      addButton = (<i className="far fa-check-square add-button" onClick={this.addPokemon} />);
     }
 
     return (
@@ -321,7 +336,7 @@ class App extends Component {
           <div className="pure-u-1-2 center-element">
             <img src={this.state.pokemonList[this.state.selectedIndex].sprites.front_default} className="pokemon-image"/>
             <br />
-            <i className="far fa-plus-square add-button" onClick={this.addPokemon} />
+            {addButton}
           </div>
           
           <div className="pure-u-1-2 eskeuro">
