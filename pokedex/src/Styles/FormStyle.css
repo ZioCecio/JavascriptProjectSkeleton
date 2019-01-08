@@ -78,3 +78,16 @@ div.select {
 div.container-select-form {
     height: 90%;
 }
+
+ul.list {
+    list-style-type: none;
+}
+
+li.item-item-list:hover {
+    background-color: rgb(184, 189, 196);
+    cursor: pointer;
+}
+
+img.item {
+    margin-top: 20%;
+}

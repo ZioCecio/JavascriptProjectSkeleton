@@ -7,9 +7,8 @@ import React, { Component } from 'react';
 export default class TopNavbar extends Component {
     render() {
         return (
-            <div className="pure-g navbar-bottom">
-                <div className="pure-u-1-3">
-                </div>
+            <div className="navbar-bottom center-element">
+                <span className="who-made">Made with <i className="fas fa-heart" /> by Cecio, Maru & Pavo</span>
             </div>
         )
     }

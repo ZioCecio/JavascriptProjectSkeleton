@@ -108,3 +108,8 @@ i.add-button:hover {
   cursor: pointer;
   color: #ccc;
 }
+
+span.who-made {
+  color: white;
+  font-size: 120%;
+}
