@@ -34,7 +34,7 @@ export default class CreatingForm extends Component {
             if(item.name.startsWith(search)) {
                 return (
                     <li className="item-item-list" key={index}>
-                        <Item name={item.name} image={item.sprites.default} description={this.getRightDescription("en", item.flavor_text_entries)} />
+                        <Item name={item.name} image={item.sprites.default} description={item.rightDescription} />
                     </li>
                 )
             }
@@ -46,10 +46,14 @@ export default class CreatingForm extends Component {
     }
 
     componentDidMount() {
+        for(let i = 0; i < this.state.itemsList.length; i++) {
+            this.state.itemsList[i].rightDescription = this.getRightDescription("en", this.state.itemsList[i].flavor_text_entries);
+        }
+
         this.items = this.state.itemsList.map((item, index) => {
             return (
                 <li className="item-item-list" key={index}>
-                    <Item name={item.name} image={item.sprites.default} description={this.getRightDescription("en", item.flavor_text_entries)} />
+                    <Item name={item.name} image={item.sprites.default} description={item.rightDescription} />
                 </li>
             )
         });
