@@ -83,6 +83,10 @@ ul.list {
     list-style-type: none;
 }
 
+div.list-of-items {
+    border-bottom: solid #ccc 0.2vh;
+}
+
 li.item-item-list:hover {
     background-color: rgb(184, 189, 196);
     cursor: pointer;

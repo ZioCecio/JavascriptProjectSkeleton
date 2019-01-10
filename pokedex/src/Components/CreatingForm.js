@@ -7,14 +7,19 @@ export default class CreatingForm extends Component {
         super(props);
         this.state = {
             itemsList: this.props.itemsList,
+            abilitiesList: this.props.abilitiesList,
             listToShow: null
         }
     }
 
-    itemClick = () => {
+    clickItemText = () => {
         this.setState({
             listToShow: this.items
-        })
+        });
+    }
+
+    clickItem = (item) => {
+        document.getElementById("item").value = item;
     }
 
     getRightDescription = (language, textList) => {
@@ -28,22 +33,24 @@ export default class CreatingForm extends Component {
 
     typingItem = () => {
         let search = document.getElementById("item").value;
-        console.log(search);
 
         this.items = this.state.itemsList.map((item, index) => {
             if(item.name.startsWith(search)) {
                 return (
                     <li className="item-item-list" key={index}>
-                        <Item name={item.name} image={item.sprites.default} description={item.rightDescription} />
+                        <Item name={item.name} image={item.sprites.default} description={item.rightDescription} handleClick={this.clickItem} />
                     </li>
                 )
             }
+            return;
         });
 
         this.setState({
             listToShow: this.items
         });
     }
+
+    
 
     componentDidMount() {
         for(let i = 0; i < this.state.itemsList.length; i++) {
@@ -53,9 +60,13 @@ export default class CreatingForm extends Component {
         this.items = this.state.itemsList.map((item, index) => {
             return (
                 <li className="item-item-list" key={index}>
-                    <Item name={item.name} image={item.sprites.default} description={item.rightDescription} />
+                    <Item name={item.name} image={item.sprites.default} description={item.rightDescription} handleClick={this.clickItem} />
                 </li>
             )
+        });
+
+        this.abilities = this.state.abilitiesList.map((ability, index) => {
+            console.log(ability);
         });
     }
 
@@ -65,7 +76,7 @@ export default class CreatingForm extends Component {
                 <form className="pure-form">
                     <div className="pure-u-1-3">
                         <p>Item:</p>
-                        <input id="item" type="text" className="pure-text select-form" onClick={this.itemClick} onChange={this.typingItem} /> <br/>
+                        <input id="item" type="text" className="pure-text select-form" onClick={this.clickItemText} onChange={this.typingItem} /> <br/>
                         <p>Ability:</p>
                         <input type="text" className="pure-text select-form" />
                     </div>
