@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Item from './Item';
+import Ability from './Ability';
 
 export default class CreatingForm extends Component {
     constructor(props) {
@@ -15,6 +16,12 @@ export default class CreatingForm extends Component {
     clickItemText = () => {
         this.setState({
             listToShow: this.items
+        });
+    }
+
+    clickAbilityText = () => {
+        this.setState({
+            listToShow: this.abilities
         });
     }
 
@@ -66,7 +73,11 @@ export default class CreatingForm extends Component {
         });
 
         this.abilities = this.state.abilitiesList.map((ability, index) => {
-            console.log(ability);
+            return (
+                <li className="ability-item-list" key={index}>
+                    <Ability ability={ability.ability.name} />
+                </li>
+            )
         });
     }
 
@@ -78,7 +89,7 @@ export default class CreatingForm extends Component {
                         <p>Item:</p>
                         <input id="item" type="text" className="pure-text select-form" onClick={this.clickItemText} onChange={this.typingItem} /> <br/>
                         <p>Ability:</p>
-                        <input type="text" className="pure-text select-form" />
+                        <input type="text" className="pure-text select-form" onClick={this.clickAbilityText} />
                     </div>
                     <div className="pure-u-1-3">
                         <p>Moveset</p>

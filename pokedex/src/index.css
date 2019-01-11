@@ -113,3 +113,11 @@ span.who-made {
   color: white;
   font-size: 120%;
 }
+
+a.repository-git {
+  color: white;
+}
+
+a.repository-git:hover {
+  color: rgb(233, 233, 233);
+}

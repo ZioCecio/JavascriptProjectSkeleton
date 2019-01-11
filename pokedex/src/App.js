@@ -315,7 +315,7 @@ class App extends Component {
 
     //Se il bottone è già stato premuto allora verra visualizzato il form per inserire i dati e il bottone per aggiungere il pokemon alla squadra
     if(this.state.clicked) {
-      bomber = <CreatingForm itemsList={this.state.itemsList} />;
+      bomber = <CreatingForm itemsList={this.state.itemsList} abilitiesList={this.state.pokemonList[this.state.selectedIndex].abilities} />;
       addButton = (<i className="far fa-check-square add-button" onClick={this.addPokemon} />);
     }
 
