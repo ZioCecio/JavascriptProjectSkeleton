@@ -6,6 +6,7 @@ import BottomNavbar from './Components/BottomNavbar';
 
 import Team from './Components/Team';
 import CreatingForm from './Components/CreatingForm';
+import Type from './Components/Type';
 
 
 /**
@@ -300,9 +301,7 @@ class App extends Component {
     //Per ogni tipo che posside un pokemon crea un nuovo componente per mostarlo
     const types = this.state.pokemonList[this.state.selectedIndex].types.map((item, index) => {
       return(
-        <div className={"pure-u-1-2 type " + item.type.name} key={index}>
-          <p className="type">{item.type.name}</p>
-        </div>
+        <Type type={item.type.name} key={index} />
       )
     });
 
@@ -315,8 +314,8 @@ class App extends Component {
 
     //Se il bottone è già stato premuto allora verra visualizzato il form per inserire i dati e il bottone per aggiungere il pokemon alla squadra
     if(this.state.clicked) {
-      bomber = <CreatingForm itemsList={this.state.itemsList} abilitiesList={this.state.pokemonList[this.state.selectedIndex].abilities} />;
-      addButton = (<i className="far fa-check-square add-button" onClick={this.addPokemon} />);
+      bomber = <CreatingForm itemsList={this.state.itemsList} abilitiesList={this.state.pokemonList[this.state.selectedIndex].abilities} movesList={this.state.pokemonList[this.state.selectedIndex].moves} />;
+      addButton = (<i className="far fa-check-square add-button" onClick={() => document.getElementById("submit-button").click()} />);
     }
 
     return (

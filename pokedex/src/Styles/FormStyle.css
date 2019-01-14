@@ -87,20 +87,20 @@ div.list-of-items {
     border-bottom: solid #ccc 0.2vh;
 }
 
-li.ability-item-list {
+li.item-list {
     height: 10%;
 }
 
-li.ability-item-list:hover {
-    background-color: rgb(184, 189, 196);
-    cursor: pointer;
-}
-
-li.item-item-list:hover {
+li.item-list:hover {
     background-color: rgb(184, 189, 196);
     cursor: pointer;
 }
 
 img.item {
     margin-top: 20%;
+}
+
+div.max {
+  height: 100%;
+  width: 100%;
 }
