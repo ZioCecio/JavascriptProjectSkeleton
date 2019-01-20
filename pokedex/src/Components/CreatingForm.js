@@ -36,9 +36,9 @@ export default class CreatingForm extends Component {
     clickMoveText = id => {
         this.clickedMoveText = id;
 
-        this.setState({
-            listToShow: this.move
-        });
+        document.getElementById("move-" + id).style.backgroundColor = "white";
+
+        this.typingMove();
     }
 
     clickItem = item => {
@@ -81,6 +81,25 @@ export default class CreatingForm extends Component {
         });
     }
 
+    typingMove = () => {
+        let search = document.getElementById("move-" + this.clickedMoveText).value;
+
+        this.moves = this.state.movesList.map((move, index) => {
+            if(move.move.name.startsWith(search)) {
+                return (
+                    <li className="item-list" key={index}>
+                        <Move move={move.move.name} handleClick={this.clickMove} />
+                    </li>
+                )
+            }
+            return;
+        });
+
+        this.setState({
+            listToShow: this.moves
+        });
+    }
+
     onSubmit = event => {
         event.preventDefault();
 
@@ -91,15 +110,15 @@ export default class CreatingForm extends Component {
 
         let rightItem = false;
         let rightAbility = false;
-        let rightMoveset = false;
+        let rightMoveset = [false, false, false, false];
 
         let item = itemText.value.toLowerCase();
         let ability = abilityText.value;
         let moveset = [
-            document.getElementById("move-1").value,
-            document.getElementById("move-2").value,
-            document.getElementById("move-3").value,
-            document.getElementById("move-4").value
+            document.getElementById("move-1"),
+            document.getElementById("move-2"),
+            document.getElementById("move-3"),
+            document.getElementById("move-4")
         ];
 
         this.state.itemsList.forEach(it => {
@@ -113,17 +132,13 @@ export default class CreatingForm extends Component {
                 rightAbility = true;
         });
 
-        /*
-        let cont = 0;
         this.state.movesList.forEach(mov => {
-            moveset.forEach(m => {
-                if(mov.move.name.localeCompare(m))
-                    cont++;
+            moveset.forEach((m, i) => {
+                if(mov.move.name.localeCompare(m.value) === 0) {
+                    rightMoveset[i] = true;
+                }
             });
         });
-        if(cont >= 4)
-            rightMoveset = true;
-        */
 
         if(!rightItem) {
             itemText.style.backgroundColor = "pink";
@@ -133,6 +148,13 @@ export default class CreatingForm extends Component {
         if(!rightAbility) {
             abilityText.style.backgroundColor = "pink";
             abilityText.value = "";
+        }
+
+        for(let i = 0; i < rightMoveset.length; i++) {
+            if(!rightMoveset[i]) {
+                moveset[i].style.backgroundColor = "pink";
+                moveset[i].value = "";
+            }
         }
 
         
@@ -182,10 +204,10 @@ export default class CreatingForm extends Component {
                     </div>
                     <div className="pure-u-1-3">
                         <p>Moveset</p>
-                        <input id="move-1" type="text" className="pure-text moveset select-form" onClick={() => this.clickMoveText(1)} /> <br/>
-                        <input id="move-2" type="text" className="pure-text moveset select-form" onClick={() => this.clickMoveText(2)} /> <br/>
-                        <input id="move-3" type="text" className="pure-text moveset select-form" onClick={() => this.clickMoveText(3)} /> <br/>
-                        <input id="move-4" type="text" className="pure-text moveset select-form" onClick={() => this.clickMoveText(4)} />
+                        <input id="move-1" type="text" className="pure-text moveset select-form" onClick={() => this.clickMoveText(1)} onChange = {this.typingMove} /> <br/>
+                        <input id="move-2" type="text" className="pure-text moveset select-form" onClick={() => this.clickMoveText(2)} onChange = {this.typingMove} /> <br/>
+                        <input id="move-3" type="text" className="pure-text moveset select-form" onClick={() => this.clickMoveText(3)} onChange = {this.typingMove} /> <br/>
+                        <input id="move-4" type="text" className="pure-text moveset select-form" onClick={() => this.clickMoveText(4)} onChange = {this.typingMove} />
                     </div>
                     <div className="pure-u-1-3">
                         <h1>EVS</h1>
