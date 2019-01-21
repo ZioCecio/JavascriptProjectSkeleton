@@ -104,3 +104,8 @@ div.max {
   height: 100%;
   width: 100%;
 }
+
+input.range {
+    width: 100%;
+    margin-top: 10%;
+}

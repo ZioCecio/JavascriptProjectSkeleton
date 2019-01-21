@@ -4,6 +4,8 @@ import Item from './Item';
 import Ability from './Ability';
 import Move from './Move';
 
+import Spinner from './Spinner';
+
 export default class CreatingForm extends Component {
     constructor(props) {
         super(props);
@@ -11,10 +13,13 @@ export default class CreatingForm extends Component {
             itemsList: this.props.itemsList,
             abilitiesList: this.props.abilitiesList,
             movesList: this.props.movesList,
-            listToShow: null
+            listToShow: null,
+            maxEvs: 508,
+            totalEvs: 0
         }
 
         this.clickedMoveText = 0;
+        this.evs = [];
     }
 
     clickItemText = () => {
@@ -100,6 +105,37 @@ export default class CreatingForm extends Component {
         });
     }
 
+    calculateUsedEvs = () => {
+        let ranges = document.getElementsByClassName("range");
+
+        let cont = 0;
+        for(let i = 0; i < ranges.length; i++)
+            cont += Number(ranges[i].value);
+
+        this.setState({
+            totalEvs: cont
+        });
+    }
+
+    usingSpinner = who => {
+        let value = document.getElementById(who).value;
+        console.log(who);
+
+        if(value >= this.state.maxEvs - this.state.totalEvs) {
+            document.getElementById(who).value = this.state.maxEvs - this.state.totalEvs;
+            this.evs[who] = value;
+        }
+        this.calculateUsedEvs();
+    }
+
+    calculateMaxSpinner = () => {
+        return this.state.totalEvs >= 252 ? 252 : this.state.totalEvs
+    }
+
+    calculateEvs = ofWho => {
+        return this.evs[ofWho];
+    }
+
     onSubmit = event => {
         event.preventDefault();
 
@@ -156,10 +192,6 @@ export default class CreatingForm extends Component {
                 moveset[i].value = "";
             }
         }
-
-        
-
-        console.log("BELLA");
     }
 
     componentDidMount() {
@@ -190,9 +222,17 @@ export default class CreatingForm extends Component {
               </li>
             )
         });
+
+        this.evs["HP"] = 0;
+        this.evs["Atk"] = 0;
+        this.evs["Def"] = 0;
+        this.evs["SAtk"] = 0;
+        this.evs["SDef"] = 0;
+        this.evs["Spd"] = 0;
     }
 
     render() {
+
         return(
             <div className="container-select-form">
                 <form id="myForm" className="pure-form" onSubmit={this.onSubmit}>
@@ -210,7 +250,8 @@ export default class CreatingForm extends Component {
                         <input id="move-4" type="text" className="pure-text moveset select-form" onClick={() => this.clickMoveText(4)} onChange = {this.typingMove} />
                     </div>
                     <div className="pure-u-1-3">
-                        <h1>EVS</h1>
+                        <Spinner name="HP" evs={this.evs["HP"]} usingSpinner={this.usingSpinner} />
+                        <Spinner name="Atk" evs={this.evs["Atk"]} usingSpinner={this.usingSpinner} />
                     </div>
 
                     <button id="submit-button" type="submit" hidden />
