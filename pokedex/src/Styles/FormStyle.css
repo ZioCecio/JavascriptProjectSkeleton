@@ -64,6 +64,7 @@ input.moveset {
 
 input.select-form {
     width: 75%;
+    height: 3.5vh;
 }
 
 div.select {
@@ -108,4 +109,12 @@ div.max {
 input.range {
     width: 100%;
     margin-top: 10%;
+}
+
+div.spinner-container {
+    height: 3.5vh;
+}
+
+div.container-select-form {
+    height: 80%;
 }

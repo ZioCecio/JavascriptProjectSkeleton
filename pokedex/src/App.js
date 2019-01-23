@@ -129,7 +129,7 @@ class App extends Component {
    */
   changePokemon = direction => {
     //Impedisce che si scorra la lista troppo velocemente
-    if(this.pressed)
+    if(this.pressed || this.state.clicked)
       return;
 
     let {selectedIndex} = this.state; //Indice "puntatore"
@@ -153,6 +153,9 @@ class App extends Component {
    * @param {Object} event - Informazioni relative all'evento scatenato dalla pressione di un tasto
    */
   handleKeyDown = event => {
+    if(this.state.clicked)
+      return;
+
     if(event.keyCode === 40)
       this.changePokemon(1);
     
@@ -183,16 +186,12 @@ class App extends Component {
 
   /**
    * Aggiunge il pokemon al momento selezionato alla lista di pokemon scelti dall'utente
+   * @param {Object} pokemon - Il pokemon da aggiungere alla lista
    */
-  addPokemon = () => {
-    const name = this.state.pokemonList[this.state.selectedIndex].name; //Nome del pokemon selezionato
-    const image = this.state.pokemonList[this.state.selectedIndex].sprites.front_default; //Sprite del pokemon selezionato
-
-    //Oggetto pokemon nel quale sono specificati il suo nome e la sua sprite
-    const pokemon = {
-      name,
-      image
-    };
+  addPokemon = pokemon => {
+    //Recupera il nome e l'immagine del pokemon corrente
+    pokemon.name = this.state.pokemonList[this.state.selectedIndex].name;
+    pokemon.image = this.state.pokemonList[this.state.selectedIndex].sprites.front_default;
 
     let {selectedPokemons} = this.state;  //Lista di pokemon scelti dall'utente
 
@@ -235,6 +234,46 @@ class App extends Component {
     this.setState({
       clicked: true
     });
+  }
+
+  clickReturn = () => {
+    this.setState({
+      clicked: false
+    });
+  }
+
+  downloadFile = () => {
+    let fileName = "team.txt";
+    let text = "";
+
+    this.state.selectedPokemons.forEach(pokemon => {
+      if(pokemon != null) {
+        text += pokemon.name + " @ " + pokemon.item + "\nAbility: " + pokemon.ability + "\nEVs: ";
+        for(let key in pokemon.evs) {
+          if(pokemon.evs[key] > 0)
+            text+= pokemon.evs[key] + " " + key + " / ";
+        }
+        text = text.substring(0, text.length - 2);
+        text += "\nSerious Nature\n";
+
+        pokemon.moveset.forEach(move => {
+          text += "- " + move + "\n";
+        });
+
+        text += "\n";
+      }
+    });
+
+    let element = document.createElement("a");
+    element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
+    element.setAttribute("download", fileName);
+
+    element.style.display = "none";
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
   }
 
 
@@ -314,8 +353,14 @@ class App extends Component {
 
     //Se il bottone è già stato premuto allora verra visualizzato il form per inserire i dati e il bottone per aggiungere il pokemon alla squadra
     if(this.state.clicked) {
-      bomber = <CreatingForm itemsList={this.state.itemsList} abilitiesList={this.state.pokemonList[this.state.selectedIndex].abilities} movesList={this.state.pokemonList[this.state.selectedIndex].moves} />;
-      addButton = (<i className="far fa-check-square add-button" onClick={() => document.getElementById("submit-button").click()} />);
+      bomber = <CreatingForm itemsList={this.state.itemsList} abilitiesList={this.state.pokemonList[this.state.selectedIndex].abilities} movesList={this.state.pokemonList[this.state.selectedIndex].moves} addPokemon={this.addPokemon} />;
+      addButton = 
+      (
+        <div>
+          <i className="far fa-check-square add-button" onClick={() => document.getElementById("submit-button").click()} />
+          <i className="far fa-caret-square-left add-button" onClick={this.clickReturn} />
+        </div>
+      );
     }
 
     return (
@@ -340,18 +385,18 @@ class App extends Component {
           
           <div className="pure-u-1-2 eskeuro">
 
-            <div className="pure-g">
+            <div className="pure-g traino">
               <div className="pure-u-1-2">
                 <h1 className="info-container">
                   {"#" + (this.state.selectedIndex + 1) + " " + this.state.pokemonList[this.state.selectedIndex].name.toUpperCase()}
                 </h1>
 
-                <h1>{this.state.pokemonSpeciesList[this.state.selectedIndex].shape.name.charAt(0).toUpperCase() + this.state.pokemonSpeciesList[this.state.selectedIndex].shape.name.slice(1) + " pokemon"}</h1>
+                <h1 className="justified">{this.state.pokemonSpeciesList[this.state.selectedIndex].shape.name.charAt(0).toUpperCase() + this.state.pokemonSpeciesList[this.state.selectedIndex].shape.name.slice(1) + " pokemon"}</h1>
               
                 <div>{types}</div>
               </div>
               <div className="pure-u-1-2">
-                <Team selectedPokemons={this.state.selectedPokemons} onDelete={this.deletePokemon}/>
+                <Team selectedPokemons={this.state.selectedPokemons} onDelete={this.deletePokemon} downloadFile={this.downloadFile} />
               </div>
             </div>
 

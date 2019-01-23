@@ -22,14 +22,6 @@ div.divider {
   height: 5%;
 }
 
-div.type {
-  width: 15vh;
-  text-align: center;
-  height: 3vh;
-  border-radius: 10px;
-  margin: 0.2vw;
-}
-
 p.type {
   margin-top: 0%;
   font-size: 2vh;
@@ -102,6 +94,7 @@ p, h1 {
 i.add-button {
   font-size: 350%;
   margin-top: 5%;
+  margin: 1%;
 }
 
 i.add-button:hover {
@@ -120,4 +113,12 @@ a.repository-git {
 
 a.repository-git:hover {
   color: rgb(233, 233, 233);
+}
+
+div.traino {
+  height: 33%;
+}
+
+h1.justified {
+  font-size: 150%;
 }

@@ -69,3 +69,11 @@
 .ghost {
     background-color: rgb(131, 76, 155);
 }
+
+div.type {
+    width: 7vw;
+    text-align: center;
+    height: 3vh;
+    border-radius: 10px;
+    margin: 0.2vw;
+  }

@@ -15,11 +15,17 @@ export default class CreatingForm extends Component {
             movesList: this.props.movesList,
             listToShow: null,
             maxEvs: 508,
-            totalEvs: 0
+            totalEvs: []
         }
 
         this.clickedMoveText = 0;
-        this.evs = [];
+
+        this.state.totalEvs["HP"] = 0;
+        this.state.totalEvs["Atk"] = 0;
+        this.state.totalEvs["Def"] = 0;
+        this.state.totalEvs["SAtk"] = 0;
+        this.state.totalEvs["SDef"] = 0;
+        this.state.totalEvs["Spd"] = 0;
     }
 
     clickItemText = () => {
@@ -112,20 +118,29 @@ export default class CreatingForm extends Component {
         for(let i = 0; i < ranges.length; i++)
             cont += Number(ranges[i].value);
 
-        this.setState({
-            totalEvs: cont
-        });
+        return cont;
     }
 
     usingSpinner = who => {
         let value = document.getElementById(who).value;
-        console.log(who);
+        let evs = this.state.totalEvs;
 
+        if(this.calculateUsedEvs() <= this.state.maxEvs)
+            evs[who] = value;
+        else
+        document.getElementById(who).value = evs[who];
+
+        this.setState({
+            totalEvs: evs
+        });
+
+        /*
         if(value >= this.state.maxEvs - this.state.totalEvs) {
             document.getElementById(who).value = this.state.maxEvs - this.state.totalEvs;
             this.evs[who] = value;
         }
         this.calculateUsedEvs();
+        */
     }
 
     calculateMaxSpinner = () => {
@@ -159,7 +174,6 @@ export default class CreatingForm extends Component {
 
         this.state.itemsList.forEach(it => {
             if(it.name.localeCompare(item) === 0) {
-                console.log(item);
                 rightItem = true;
             }
         });
@@ -179,18 +193,35 @@ export default class CreatingForm extends Component {
         if(!rightItem) {
             itemText.style.backgroundColor = "pink";
             itemText.value = "";
+            allRight = false;
         }
 
         if(!rightAbility) {
             abilityText.style.backgroundColor = "pink";
             abilityText.value = "";
+            allRight = false;
         }
 
         for(let i = 0; i < rightMoveset.length; i++) {
             if(!rightMoveset[i]) {
                 moveset[i].style.backgroundColor = "pink";
                 moveset[i].value = "";
+                allRight = false;
             }
+        }
+
+        if(allRight) {
+            this.props.addPokemon({
+                item: item,
+                ability: ability,
+                moveset: [
+                    moveset[0].value,
+                    moveset[1].value,
+                    moveset[2].value,
+                    moveset[3].value
+                ],
+                evs: this.state.totalEvs
+            });
         }
     }
 
@@ -222,13 +253,6 @@ export default class CreatingForm extends Component {
               </li>
             )
         });
-
-        this.evs["HP"] = 0;
-        this.evs["Atk"] = 0;
-        this.evs["Def"] = 0;
-        this.evs["SAtk"] = 0;
-        this.evs["SDef"] = 0;
-        this.evs["Spd"] = 0;
     }
 
     render() {
@@ -250,8 +274,12 @@ export default class CreatingForm extends Component {
                         <input id="move-4" type="text" className="pure-text moveset select-form" onClick={() => this.clickMoveText(4)} onChange = {this.typingMove} />
                     </div>
                     <div className="pure-u-1-3">
-                        <Spinner name="HP" evs={this.evs["HP"]} usingSpinner={this.usingSpinner} />
-                        <Spinner name="Atk" evs={this.evs["Atk"]} usingSpinner={this.usingSpinner} />
+                        <Spinner name="HP" evs={this.state.totalEvs["HP"]} usingSpinner={this.usingSpinner} />
+                        <Spinner name="Atk" evs={this.state.totalEvs["Atk"]} usingSpinner={this.usingSpinner} />
+                        <Spinner name="Def" evs={this.state.totalEvs["Def"]} usingSpinner={this.usingSpinner} />
+                        <Spinner name="SAtk" evs={this.state.totalEvs["SAtk"]} usingSpinner={this.usingSpinner} />
+                        <Spinner name="SDef" evs={this.state.totalEvs["SDef"]} usingSpinner={this.usingSpinner} />
+                        <Spinner name="Spd" evs={this.state.totalEvs["Spd"]} usingSpinner={this.usingSpinner} />
                     </div>
 
                     <button id="submit-button" type="submit" hidden />
