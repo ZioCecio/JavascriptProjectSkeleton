@@ -228,7 +228,7 @@ class App extends Component {
 
 
   /**
-   * Cambia lo stato ogni volta che il bottone per aggiungere il pokemon alla squadra viene cliccato
+   * Cambia lo stato ogni volta che il bottone per aggiungere il pokemon alla squadra viene cliccato per visualizzare il form di inserimento
    */
   clickAdd = () => {
     this.setState({
@@ -236,26 +236,40 @@ class App extends Component {
     });
   }
 
+
+  /**
+   * Cambia lo stato ogni volta che il bottone per annullare l'iserimento del pokemon alla squadra viene annullato per visualizzare la descrizione del pokemon
+   */
   clickReturn = () => {
     this.setState({
       clicked: false
     });
   }
 
+
+  /**
+   * Crea un file .txt contenente le informazioni relative alla squadra di pokemon selezionata
+   * Il file viene anche scaricato direttamente
+   */
   downloadFile = () => {
     let fileName = "team.txt";
     let text = "";
 
+    //Per ogni pokemon nella lista...
     this.state.selectedPokemons.forEach(pokemon => {
       if(pokemon != null) {
+        //...scrive il suo nome, il suo oggetta e la sua abilità
         text += pokemon.name + " @ " + pokemon.item + "\nAbility: " + pokemon.ability + "\nEVs: ";
+        //Scrive sul file gli evs (punti forza)
         for(let key in pokemon.evs) {
           if(pokemon.evs[key] > 0)
             text+= pokemon.evs[key] + " " + key + " / ";
         }
+        //Cancella l'ultima "/" e aggiunge la natura
         text = text.substring(0, text.length - 2);
         text += "\nSerious Nature\n";
 
+        //Scrive sul file le mosse selezionate
         pokemon.moveset.forEach(move => {
           text += "- " + move + "\n";
         });
@@ -264,6 +278,7 @@ class App extends Component {
       }
     });
 
+    //Crea il link nascosto per scaricare il file .txt e lo clicca per avviare il download
     let element = document.createElement("a");
     element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
     element.setAttribute("download", fileName);

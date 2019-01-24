@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 
+
+/**
+ * Classe che disegna e mostra tutte le informazioni relative all'oggetto passato come parametro
+ */
 export default class Item extends Component {
     render() {
         return (

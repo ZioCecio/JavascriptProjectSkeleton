@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+
+/**
+ * Classe che disegna uno spinner
+ * Usata per "raccogliere" gli evs (punti forza) selezionati dall'utente
+ */
 export default class Spinner extends Component {
     render() {
         return(

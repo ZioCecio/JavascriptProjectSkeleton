@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+
+/**
+ * Classe che disegna un div contenente le informazioni relative all'abilità del pokemon
+ */
 export default class Ability extends Component {
     render() {
         return (
