@@ -1,20 +1,18 @@
 # Scheletro per i lavori di gruppo
 
-## Titolo progetto 
+## POKEDEX 
 
-Ogni gruppo definisce un titolo progetto (< 100 caratteri) e una descrizione( <500 caratteri)
+Applicazione realizzata con React.js che permette la visualizzazione di un pokedex, ovvero una lista di simpatiche creature chiamate pokemon e le relative informazioni dettagliate! Crea inoltre una squadra di pokemon definita e personalizzata dall'utente e scarica un file.txt da importare su [PokemonShowdown](https://pokemonshowdown.com/) per iniziare subito a combattere con la squadra appena creata!
 
 ## Partecipanti
-Elenco partecipanti
-Maruelli
-Piovanelli
-Ceresara
+* Ceresara Gabriele
+* Maruelli Alessandro
+* Piovanelli Michele
 
 ## Ruoli
-
-* PROJECT_MANAGER = 
-* DOCUMENTAZIONE = 
-* CSS = 
+* PROJECT_MANAGER = Ceresara Gabriele
+* DOCUMENTAZIONE = Maruelli Alessandro, Piovanelli Michele
+* CSS = Ceresara Gabriele (si ringrazia anche [Pure.css](https://purecss.io/) :heart:)
 
 ## Regolamento
 * Ogni gruppo consegnerà il link ad un repository GIT che sarà un fork di questo progetto.
