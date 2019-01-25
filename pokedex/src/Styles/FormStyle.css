@@ -109,10 +109,11 @@ div.max {
 input.range {
     width: 100%;
     margin-top: 10%;
+    height: 2vw;
 }
 
 div.spinner-container {
-    height: 3.5vh;
+    height: 1.6vw;
 }
 
 div.container-select-form {
@@ -128,4 +129,8 @@ button.create-file {
     width: 30%;
     border: none;
     margin-left: 35%;
+}
+
+p.spinner-name {
+    font-size: 1vw;
 }
