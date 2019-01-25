@@ -2,7 +2,7 @@
 
 ## POKEDEX 
 
-Applicazione realizzata con React.js che permette la visualizzazione di un pokedex, ovvero una lista di simpatiche creature chiamate pokemon e le relative informazioni dettagliate! Crea inoltre una squadra di pokemon definita e personalizzata dall'utente e scarica un file.txt da importare su [Pokemonshowdown](https://pokemonshowdown.com/) per iniziare subito a combattere con la squadra appena creata!
+Applicazione realizzata con React.js che permette la visualizzazione di un pokedex, ovvero una lista di simpatiche creature chiamate pokemon e le relative informazioni dettagliate! Crea inoltre una squadra di pokemon definita e personalizzata dall'utente e scarica un file.txt da importare su [PokemonShowdown](https://pokemonshowdown.com/) per iniziare subito a combattere con la squadra appena creata!
 
 ## Partecipanti
 * Ceresara Gabriele
