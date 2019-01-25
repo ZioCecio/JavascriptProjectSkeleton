@@ -5,16 +5,14 @@
 Ogni gruppo definisce un titolo progetto (< 100 caratteri) e una descrizione( <500 caratteri)
 
 ## Partecipanti
-Elenco partecipanti
-Maruelli
-Piovanelli
-Ceresara
+* Ceresara Gabriele
+* Maruelli Alessandro
+* Piovanelli Michele
 
 ## Ruoli
-
-* PROJECT_MANAGER = 
-* DOCUMENTAZIONE = 
-* CSS = 
+* PROJECT_MANAGER = Ceresara
+* DOCUMENTAZIONE = Maruelli, Piovanelli
+* CSS = Ceresara
 
 ## Regolamento
 * Ogni gruppo consegnerà il link ad un repository GIT che sarà un fork di questo progetto.
