@@ -10,8 +10,8 @@ Ogni gruppo definisce un titolo progetto (< 100 caratteri) e una descrizione( <5
 * Piovanelli Michele
 
 ## Ruoli
-* PROJECT_MANAGER = Ceresara
-* DOCUMENTAZIONE = Maruelli, Piovanelli
+* PROJECT_MANAGER = Ceresara Gabriele
+* DOCUMENTAZIONE = Maruelli Alessandro, Piovanelli Michele
 * CSS = Ceresara
 
 ## Regolamento
