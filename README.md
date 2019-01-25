@@ -1,6 +1,6 @@
 # Scheletro per i lavori di gruppo
 
-## Titolo progetto 
+## POKEDEX 
 
 Ogni gruppo definisce un titolo progetto (< 100 caratteri) e una descrizione( <500 caratteri)
 
