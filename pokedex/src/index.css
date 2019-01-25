@@ -22,12 +22,6 @@ div.divider {
   height: 5%;
 }
 
-p.type {
-  margin-top: 0%;
-  font-size: 2vh;
-  color: white;
-}
-
 .pokemon-image {
   border: solid 0.4vw #ccc;
   -moz-border-radius: 10px;
@@ -41,8 +35,9 @@ p.type {
   height: 100vh;
 }
 
-.info-container {
-  margin-top: 10%;
+h1.info-container {
+  margin-top: 1vw;
+  font-size: 2vw;
 }
 
 @font-face {
@@ -55,6 +50,7 @@ div.description {
   border: solid 1px black;
   border-radius: 10px;
   margin-top: 2vw;
+  height: 10vw;
 }
 
 div.eskeuro {
@@ -92,7 +88,7 @@ p, h1 {
 }
 
 i.add-button {
-  font-size: 350%;
+  font-size: 3vw;
   margin-top: 5%;
   margin: 1%;
 }
@@ -120,7 +116,7 @@ div.traino {
 }
 
 h1.justified {
-  font-size: 150%;
+  font-size: 1.5vw;
 }
 
 div.loader {

@@ -77,3 +77,9 @@ div.type {
     border-radius: 10px;
     margin: 0.2vw;
   }
+
+  p.type {
+    margin-top: 0%;
+    font-size: 1vw;
+    color: white;
+  }
