@@ -30,7 +30,7 @@ export default class Team extends Component {
         return(
             <div className="pure-g team-container">
                 {pokemon}
-                <button className="pure-button" onClick={this.props.downloadFile}>ESKERE</button>
+                <button className="create-file" onClick={this.props.downloadFile}>DOWNLOAD</button>
             </div>
         )
     }

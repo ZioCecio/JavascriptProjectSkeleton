@@ -8,6 +8,8 @@ import Team from './Components/Team';
 import CreatingForm from './Components/CreatingForm';
 import Type from './Components/Type';
 
+import Loading from './Components/Loading';
+
 
 /**
  * Classe che disegna tutta la pagina e gestisce l'applicazione
@@ -350,7 +352,7 @@ class App extends Component {
   render() {
     //Se la lista di pokemon non è ancora stata riempita fa visualizzare un caricamento
     if(this.state.pokemonList.length <= 0 || this.state.itemsList.length <= 0)
-      return (<p>BOYYY</p>);
+      return (<Loading />);
 
     //Per ogni tipo che posside un pokemon crea un nuovo componente per mostarlo
     const types = this.state.pokemonList[this.state.selectedIndex].types.map((item, index) => {

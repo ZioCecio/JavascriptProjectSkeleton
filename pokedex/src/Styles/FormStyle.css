@@ -118,3 +118,14 @@ div.spinner-container {
 div.container-select-form {
     height: 80%;
 }
+
+button.create-file {
+    background-color: rgb(255, 217, 0);
+    color: white;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 0.7vw;
+    height: 15%;
+    width: 30%;
+    border: none;
+    margin-left: 35%;
+}
